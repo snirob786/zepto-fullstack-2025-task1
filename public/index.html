@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Font Group System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body class="bg-gray-100 p-4">
+    <div class="container mx-auto">
+      <!-- Font Upload -->
+      <section class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Upload Font</h2>
+        <!-- Drag-and-drop area added via JavaScript -->
+        <input
+          type="file"
+          id="fontUpload"
+          accept=".ttf"
+          class="border p-2 hidden"
+        />
+      </section>
+
+      <!-- Font List -->
+      <section class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Our Fonts</h2>
+        <table id="fontTable" class="w-full border">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="p-2">Font Name</th>
+              <th class="p-2">Preview</th>
+              <th class="p-2">Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Create Font Group -->
+      <section class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Create Font Group</h2>
+        <p class="text-red-500 mb-2" id="groupError"></p>
+        <div class="mb-4">
+          <label class="block">Group Title</label>
+          <input type="text" id="groupTitle" class="border p-2 w-full" />
+        </div>
+        <div id="fontGroupRows">
+          <div class="flex mb-2">
+            <select class="fontSelect border p-2 mr-2 flex-1">
+              <option value="">Select a Font</option>
+            </select>
+          </div>
+        </div>
+        <button id="addRow" class="bg-blue-500 text-white p-2 rounded">
+          + Add Row
+        </button>
+        <button
+          id="createGroup"
+          class="bg-green-500 text-white p-2 rounded ml-2"
+        >
+          Create
+        </button>
+      </section>
+
+      <!-- Font Group List -->
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Font Groups</h2>
+        <table id="groupTable" class="w-full border">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="p-2">Group Title</th>
+              <th class="p-2">Fonts</th>
+              <th class="p-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </div>
+    <script src="/assets/js/app.js"></script>
+  </body>
+</html>

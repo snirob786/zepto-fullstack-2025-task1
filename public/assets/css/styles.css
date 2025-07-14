@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "DynamicFont";
+  src: url("/fonts/") format("truetype");
+}
+.font-preview {
+  font-family: "DynamicFont", sans-serif;
+}
+.border-dashed:hover {
+  background-color: #e5e7eb; /* Tailwind's bg-gray-200 */
+}
+
+#fontTable td {
+  text-align: center;
+}
