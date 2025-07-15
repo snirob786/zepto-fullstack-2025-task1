@@ -1,12 +1,11 @@
-// src/database.js
-const { MongoClient } = require('mongodb');
-require('dotenv').config();
+const { MongoClient } = require("mongodb");
+require("dotenv").config();
 
 class Database {
   constructor() {
     this.uri = process.env.MONGODB_URI;
     this.client = new MongoClient(this.uri);
-    this.dbName = 'font_group_system';
+    this.dbName = "font_group_system";
     this.db = null;
   }
 
@@ -21,12 +20,12 @@ class Database {
 
   async initCollections() {
     const collections = await this.db.listCollections().toArray();
-    const collectionNames = collections.map(c => c.name);
-    if (!collectionNames.includes('fonts')) {
-      await this.db.createCollection('fonts');
+    const collectionNames = collections.map((c) => c.name);
+    if (!collectionNames.includes("fonts")) {
+      await this.db.createCollection("fonts");
     }
-    if (!collectionNames.includes('font_groups')) {
-      await this.db.createCollection('font_groups');
+    if (!collectionNames.includes("font_groups")) {
+      await this.db.createCollection("font_groups");
     }
   }
 

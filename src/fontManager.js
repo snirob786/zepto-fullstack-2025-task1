@@ -1,7 +1,6 @@
-// src/fontManager.js
 const path = require("path");
 const fs = require("fs").promises;
-const { ObjectId } = require("mongodb"); // Import ObjectId
+const { ObjectId } = require("mongodb");
 
 class FontManager {
   constructor(db) {
@@ -23,19 +22,14 @@ class FontManager {
     const filePath = path.join(fontsDir, `${Date.now()}_${file.originalname}`);
 
     try {
-      // Create directories if they don't exist
       await fs.mkdir(tempDir, { recursive: true });
       await fs.mkdir(fontsDir, { recursive: true });
-
-      // Verify source file exists
       await fs.access(file.path).catch(() => {
         throw new Error(`Temporary file not found: ${file.path}`);
       });
 
-      // Move file to fonts directory
       await fs.rename(file.path, filePath);
 
-      // Insert into MongoDB
       const result = await this.db.collection("fonts").insertOne({
         name,
         file_path: `/fonts/${path.basename(filePath)}`,
@@ -77,7 +71,7 @@ class FontManager {
         .catch((err) => {
           throw new Error(`Failed to delete font file: ${err.message}`);
         });
-      await this.db.collection("fonts").deleteOne({ _id: new ObjectId(id) }); // Use imported ObjectId
+      await this.db.collection("fonts").deleteOne({ _id: new ObjectId(id) });
       return true;
     } catch (err) {
       throw new Error(`Failed to delete font: ${err.message}`);

@@ -12,17 +12,15 @@ const upload = multer({ dest: "uploads/temp/" });
 const db = new Database();
 
 app.use(express.json());
-app.use(express.static("public")); // Serve frontend
-app.use("/fonts", express.static("uploads/fonts")); // Serve font files
+app.use(express.static("public"));
+app.use("/fonts", express.static("uploads/fonts"));
 
-// Initialize database
 let fontManager, groupManager;
 db.connect().then((database) => {
   fontManager = new FontManager(database);
   groupManager = new GroupManager(database);
 });
 
-// Font upload
 app.post("/api/fonts", upload.single("font"), async (req, res) => {
   try {
     const result = await fontManager.uploadFont(req.file);
@@ -32,7 +30,6 @@ app.post("/api/fonts", upload.single("font"), async (req, res) => {
   }
 });
 
-// Get fonts
 app.get("/api/fonts", async (req, res) => {
   try {
     const fonts = await fontManager.getFonts();
@@ -42,7 +39,6 @@ app.get("/api/fonts", async (req, res) => {
   }
 });
 
-// Delete font
 app.delete("/api/fonts/:id", async (req, res) => {
   try {
     await fontManager.deleteFont(req.params.id);
@@ -52,7 +48,6 @@ app.delete("/api/fonts/:id", async (req, res) => {
   }
 });
 
-// Create group
 app.post("/api/groups", async (req, res) => {
   try {
     const { title, fontIds } = req.body;
@@ -63,7 +58,6 @@ app.post("/api/groups", async (req, res) => {
   }
 });
 
-// Get groups
 app.get("/api/groups", async (req, res) => {
   try {
     const groups = await groupManager.getGroups();
@@ -73,7 +67,6 @@ app.get("/api/groups", async (req, res) => {
   }
 });
 
-// Update group
 app.put("/api/groups/:id", async (req, res) => {
   try {
     const { title, fontIds } = req.body;
@@ -84,7 +77,6 @@ app.put("/api/groups/:id", async (req, res) => {
   }
 });
 
-// Delete group
 app.delete("/api/groups/:id", async (req, res) => {
   try {
     await groupManager.deleteGroup(req.params.id);

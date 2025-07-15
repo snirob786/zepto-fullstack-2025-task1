@@ -1,4 +1,3 @@
-// public/assets/js/app.js
 const API_BASE_URL = "/api";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fontUpload.parentNode.insertBefore(dropZone, fontUpload);
   dropZone.appendChild(fontUpload);
 
-  // Drag-and-drop events
   dropZone.addEventListener("dragover", (e) => {
     e.preventDefault();
     dropZone.classList.add("bg-gray-200");
@@ -35,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Font upload
   fontUpload.addEventListener("change", async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -63,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Add row for font group
   addRowBtn.addEventListener("click", () => {
     const row = document.createElement("div");
     row.className = "flex mb-2";
@@ -76,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateFontSelects();
   });
 
-  // Create group
   createGroupBtn.addEventListener("click", async () => {
     const fontIds = Array.from(document.querySelectorAll(".fontSelect"))
       .map((select) => select.value)
@@ -112,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Fetch fonts
   async function fetchFonts() {
     try {
       const res = await fetch(`${API_BASE_URL}/fonts`);
@@ -163,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Fetch groups
   async function fetchGroups() {
     try {
       const res = await fetch(`${API_BASE_URL}/groups`);
@@ -280,7 +273,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Update font select dropdowns
   async function updateFontSelects() {
     try {
       const res = await fetch(`${API_BASE_URL}/fonts`);
@@ -304,10 +296,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Store original create button click handler
   createGroupBtn.originalClick = createGroupBtn.onclick;
 
-  // Initial fetch
   fetchFonts();
   fetchGroups();
 });

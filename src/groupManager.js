@@ -1,5 +1,4 @@
-// src/groupManager.js
-const { ObjectId } = require("mongodb"); // Import ObjectId
+const { ObjectId } = require("mongodb");
 
 class GroupManager {
   constructor(db) {
